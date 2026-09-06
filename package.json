@@ -2,10 +2,11 @@
   "name": "peos-api",
   "version": "1.0.0",
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
-    "build": "echo 'No build needed for API'",
-    "dev": "node api/cron/nightly-report.js"
+    "build": "echo API only - no build"
   },
   "dependencies": {
     "dotenv": "^16.6.1"
