@@ -1,3 +1,7 @@
-git add .
-git commit -m "fix: correct vercel.json and remove vite.config"
-vercel --prod --force
+{
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs24.x"
+    }
+  }
+}
