@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>PEOS Dashboard - KP Police</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{{ theme }}">
+<header>
+  <h1>🚓 PEOS DASHBOARD - KP POLICE</h1>
+  <div class="theme-switcher">
+    <a href="?theme=green">🟢 Green</a>
+    <a href="?theme=blue">🔵 Blue</a>
+    <a href="?theme=dark">🌙 Dark</a>
+  </div>
+</header>
+
+<div class="card">
+  <h2>System Status</h2>
+  <p><b>Total Backups:</b> {{ backup_count }}</p>
+  <p><b>Last Data:</b> divisions\KP-Police\2026-09-14</p>
+  <button onclick="location.href='/run-backup'">▶️ Run Backup Now</button>
+</div>
+
+<div class="card">
+  <h2>Recent Activity Log</h2>
+  <pre>{% for log in logs %}{{ log }}{% endfor %}</pre>
+</div>
+
+</body>
+</html>

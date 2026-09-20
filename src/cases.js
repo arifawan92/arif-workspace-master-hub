@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../supabaseClient'
+import { supabase } from './supabaseClient'
 
-export default function Projects() {
+export default function Cases() {
   const [projects, setProjects] = useState([])
   const [newName, setNewName] = useState('')
 
@@ -10,23 +10,48 @@ export default function Projects() {
   }, [])
 
   async function fetchProjects() {
-    const { data, error } = await supabase.from('peos_projects').select('*').order('created_at', { ascending: false })
-    if (!error) setProjects(data)
+    const { data, error } = await supabase
+   .from('peos_projects')
+   .select('*')
+   .order('created_at', { ascending: false })
+    
+    if (error) console.log('Error:', error)
+    else setProjects(data)
   }
 
   async function addProject() {
     if (!newName) return
-    const { data, error } = await supabase.from('peos_projects').insert([{ name: newName }]).select()
-    if (!error) {
+    const { data, error } = await supabase
+   .from('peos_projects')
+   .insert([{ name: newName }])
+   .select()
+    
+    if (error) console.log('Error:', error)
+    else {
       setProjects([data[0],...projects])
       setNewName('')
     }
   }
 
+  // AUTO BUILDER FUNCTION
   async function autoBuild(projectId, projectName) {
-    const defaultTasks = ['01-Planning','02-Design','03-Development','04-Testing','05-Deployment']
-    const tasksToInsert = defaultTasks.map(name => ({ project_id: projectId, name: `${projectName} - ${name}` }))
-    const { error } = await supabase.from('peos_tasks').insert(tasksToInsert)
+    const defaultTasks = [
+      '01-Planning',
+      '02-Design', 
+      '03-Development',
+      '04-Testing',
+      '05-Deployment'
+    ]
+    
+    const tasksToInsert = defaultTasks.map(name => ({
+      project_id: projectId,
+      name: `${projectName} - ${name}`
+    }))
+
+    const { error } = await supabase
+    .from('peos_tasks')
+    .insert(tasksToInsert)
+    
     if (error) alert('Error: ' + error.message)
     else alert(`Auto Builder: ${projectName} ke liye 5 tasks ban gaye!`)
   }
@@ -35,21 +60,21 @@ export default function Projects() {
     <div style={{ padding: 20 }}>
       <h2>Projects</h2>
       <div style={{ marginBottom: 20 }}>
-        <input
+        <input 
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
-          placeholder="New Project Name"
+          placeholder="Project Name"
           style={{ marginRight: 10 }}
         />
         <button onClick={addProject}>+ New Project</button>
       </div>
-
+      
       {projects.map(p => (
         <div key={p.id} style={{ border: '1px solid #ddd', padding: 15, marginBottom: 10, borderRadius: 5 }}>
-          <b style={{ fontSize: 16 }}>{p.name}</b>
-          <button
+          <b>{p.name}</b>
+          <button 
             onClick={() => autoBuild(p.id, p.name)}
-            style={{ marginLeft: 15, padding: '5px 12px', background: '#4CAF50', color: 'white', border: 'none', borderRadius: 4 }}
+            style={{ marginLeft: 15, padding: '5px 10px' }}
           >
             Auto Build
           </button>

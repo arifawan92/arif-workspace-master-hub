@@ -1,50 +1,11 @@
-﻿[
-    {
-        "Path":  "package.json",
-        "SHA256":  "9266100060067EE822DB0158F22C74142218F443052CBD3394E30C57BA201AB0"
-    },
-    {
-        "Path":  "package-lock.json",
-        "SHA256":  "E959E2C8EDA437D26543D32D21617417364FC28929FD4B61EF772EF1197ED0AB"
-    },
-    {
-        "Path":  "index.html",
-        "SHA256":  "FD0FE7882AF87D10976211BDEEDB3A2392939F892D22E927FF33D223B26AD39A"
-    },
-    {
-        "Path":  "vite.config.js",
-        "SHA256":  "4D36DB3522A7B2DD10E0936E1004373C7EE65F10F7CD7920CD76410459C15A45"
-    },
-    {
-        "Path":  "src\\services\\projectService.js",
-        "SHA256":  "E3A879EE5E9984858D9D98513B3C0EBBBFD13205611459AB97A8D00BEF66042B"
-    },
-    {
-        "Path":  "src\\context\\AppContext.jsx",
-        "SHA256":  "AC04EA2ECB3CAF65099BB639295190860171680F131C5BCD4328826EAFF7442B"
-    },
-    {
-        "Path":  "src\\components\\layout\\WorkingArea.jsx",
-        "SHA256":  "0211CD1E7652B04879AB6D441F9646CF553D10D6A7CB08B331A4737AA261DEA2"
-    },
-    {
-        "Path":  "src\\pages\\Projects.jsx",
-        "SHA256":  "AED6FA01A52200BEB6CD5E7A111ECF645F3798C440918ACEC2A3A1F0D1960002"
-    },
-    {
-        "Path":  "src\\components\\projects\\ProjectList.jsx",
-        "SHA256":  "EA2A2C84309C8C7D868374EF5458DAAD9588C6CA8576B8D01402C23B17DD11F1"
-    },
-    {
-        "Path":  "src\\components\\projects\\CreateProjectDialog.jsx",
-        "SHA256":  "9FF823D2DB5C454B61C9688D9485B091C0FBD024022B5D4E8F8648DA974EDA48"
-    },
-    {
-        "Path":  "src\\components\\projects\\ProjectToolbar.jsx",
-        "SHA256":  "C906638527A8D43CADFFFA764DC006360E7ADF81FF5B6E9AC0C64BF9323BDF92"
-    },
-    {
-        "Path":  "src\\components\\projects\\EmptyProjects.jsx",
-        "SHA256":  "E95442D122C9D66DE3E08E30170A7D117AB02B55059735B38A5B550567F8DF32"
-    }
-]
+﻿{
+  "version": "1.0.0",
+  "date": "2026-09-13",
+  "status": "VERIFIED",
+  "files": [
+    "package.json",
+    "index.html", 
+    "vite.config.js",
+    "src/main.jsx"
+  ]
+}

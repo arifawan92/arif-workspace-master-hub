@@ -1,10 +1,3 @@
-{
-  "installCommand": "npm install",
-  "buildCommand": "vite build",
-  "outputDirectory": "dist",
-  "functions": {
-    "api/heal.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+export default function handler(req, res) {
+  return res.status(200).json({ status: "ok", message: "PEOS API is alive" })
 }

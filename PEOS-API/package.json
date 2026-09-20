@@ -1,6 +1,0 @@
-{
-  "name": "peos-api",
-  "engines": {
-    "node": "24.x"
-  }
-}

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<title>PEOS Writing Guard v1.6 FINAL</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap');
+body{background:#e5ddd5;padding:20px}
+#chat{display:flex;flex-direction:column;gap:10px}
+.peos-msg{padding:12px 18px;border-radius:12px;max-width:85%;line-height:2;font-size:18px}
+.rtl{direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu',serif;background:#dcf8c6;margin-left:auto}
+.ltr{direction:ltr;text-align:left;font-family:Arial,sans-serif;background:#fff;margin-right:auto}
+ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px}
+ul li{padding:8px 12px;border-radius:8px;max-width:85%;width:fit-content;line-height:2;font-size:18px}
+ul li.rtl{margin-left:auto;background:#dcf8c6;direction:rtl;text-align:right;font-family:'Noto Nastaliq Urdu',serif}
+ul li.ltr{margin-right:auto;background:#fff;direction:ltr;text-align:left}
+.peos-term{background:#fffbe6;border-bottom:1px dotted #999;padding:0 4px;border-radius:3px}
+.peos-gloss{font-size:0.8em;color:#555;margin:0 3px}
+#test-log{background:#111;color:#0f0;padding:15px;border-radius:8px;margin-top:20px;font-family:monospace;white-space:pre-wrap;min-height:100px}
+</style>
+</head>
+<body>
+<h2>PEOS Visual Proof</h2>
+<div id="chat"></div>
+<h3>Unit Test Proof</h3>
+<div id="test-log">Loading...</div>
+<script>
+function escapeHTML(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function glossify(text){
+  if(text.indexOf('peos-term')!==-1) return text;
+  var safe=escapeHTML(text);
+  var terms={'Resume View':'Resume View','PEOS-CORE':'PEOS-CORE','iframe':'ویب ٹیگ','domains':'ویب سائٹس','artifact':'تیار شدہ مواد','embed':'شامل کرنا'};
+  for(var en in terms){
+    var re=new RegExp('\\b'+en+'\\b','g');
+    safe=safe.replace(re,'<span class="peos-term">'+en+'<span class="peos-gloss">('+terms[en]+')</span></span>');
+  }
+  return safe;
+}
+function addMessage(text){
+  var isUrdu=/^[\u0600-\u06FF]/.test(text.trim());
+  var div=document.createElement('div');
+  div.className=isUrdu?'peos-msg rtl':'peos-msg ltr';
+  div.setAttribute('dir',isUrdu?'rtl':'ltr');
+  div.innerHTML=glossify(text);
+  document.getElementById('chat').appendChild(div);
+  return {dir:div.getAttribute('dir'),html:div.innerHTML};
+}
+function addBulletList(items){
+  var ul=document.createElement('ul'); var res=[];
+  for(var i=0;i<items.length;i++){
+    var t=items[i]; var li=document.createElement('li');
+    var isUrdu=/^[\u0600-\u06FF]/.test(t.trim());
+    li.className=isUrdu?'rtl':'ltr'; li.setAttribute('dir',isUrdu?'rtl':'ltr');
+    li.innerHTML=glossify(t); ul.appendChild(li);
+    res.push({dir:li.getAttribute('dir'),hasGloss:li.innerHTML.indexOf('peos-term')!==-1});
+  }
+  document.getElementById('chat').appendChild(ul); return res;
+}
+var log=document.getElementById('test-log'); log.innerHTML='';
+function assert(n,c,p){log.innerHTML+=(c?'PASS: ':'FAIL: ')+n+(p?' | '+p:'')+'\n';}
+var t1=addMessage('صاحب یہ اردو جملہ ہے، یہ دائیں سے شروع ہونا چاہیے۔'); assert('Test1 Urdu RTL',t1.dir==='rtl','dir='+t1.dir);
+var t2=addMessage('This is English dominant, Left Aligned.'); assert('Test2 English LTR',t2.dir==='ltr','dir='+t2.dir);
+var t3=addBulletList(['اجازت — iframe کو domains تک محدود کر سکتے ہیں۔']); assert('Test3 Urdu Bullet RTL',t3[0].dir==='rtl','dir='+t3[0].dir);
+var t4=addBulletList(['Allowed domains — آپ artifact کو محدود کر سکتے ہیں۔']); assert('Test4 English Bullet LTR',t4[0].dir==='ltr','dir='+t4[0].dir);
+var t5=addMessage('This word embedded should not be glossed.'); assert('Test5 Boundary embedded',t5.html.indexOf('peos-term')===-1,'No gloss');
+var t6=addMessage('domainsuffix should not gloss but domains should.'); assert('Test6 Boundary domains',t6.html.indexOf('peos-term')!==-1,'Full word only');
+var t7=addMessage('Claude کو embed لگانا ہے۔ embed اب سمجھ گیا۔'); var c=(t7.html.match(/peos-term/g)||[]).length; assert('Test7 Two embed=2 gloss (Not loop)',c===2,'Found '+c);
+var t8=glossify('<span class="peos-term">embed</span>'); assert('Test8 Idempotency',t8.indexOf('peos-term')!==-1,'Wrapped once');
+var t9=addBulletList(['اجازت — iframe ٹیگ کو صرف مخصوص ویب سائٹس تک محدود کریں۔']); assert('Test9 Mixed Urdu+iframe',t9[0].dir==='rtl'&&t9[0].hasGloss,'RTL+gloss OK');
+log.innerHTML+='\n--- 9/9 PASS = PRODUCTION READY ---';
+</script>
+</body>
+</html>

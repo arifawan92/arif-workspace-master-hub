@@ -1,0 +1,18 @@
+﻿body { font-family: Arial; margin:0; padding:20px; }
+header { display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:8px; }
+.theme-switcher a { margin:0 5px; text-decoration:none; padding:5px 10px; border-radius:5px; }
+.card { margin-top:20px; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+pre { background:#000; color:#0f0; padding:10px; border-radius:5px; overflow-x:auto; }
+
+/* THEMES */
+body.green { background:#e8f5e9; color:#1b5e20; }
+body.green header, body.green .card { background:#c8e6c9; }
+body.green .theme-switcher a { background:#2e7d32; color:white; }
+
+body.blue { background:#e3f2fd; color:#0d47a1; }
+body.blue header, body.blue .card { background:#bbdefb; }
+body.blue .theme-switcher a { background:#1565c0; color:white; }
+
+body.dark { background:#121212; color:#ffffff; }
+body.dark header, body.dark .card { background:#1e1e1e; }
+body.dark .theme-switcher a { background:#333; color:#0f0; }

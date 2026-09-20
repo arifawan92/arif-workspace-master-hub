@@ -1,6 +1,16 @@
+﻿import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://nsjlptijbsvailyzcbbw.supabase.co'
+const supabaseAnonKey = 'sb_publishable_X5GC4SjvflJhuP7rhBW1Xw_nbY2JUJe'
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+
+
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://qqdpngxfiytevqlqjbrb.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxZHB3dmd4Zml5dGV2cWxxanJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg0MzE4MjQsImV4cCI6MjEwNDAwNzgyNH0.xnaGLBr0y1_pOXibsm5WmgJIE_UZsNIT4JVwyLeoWxk'
+const supabaseUrl = 'https://nsjlptijbsvailyzcbbw.supabase.co'
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zamxwdGlqYnN2YWlseXpjYmJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY3MjM0NTYsImV4cCI6MjAzMjI5OTQ1Nn0.XXXXX'
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
