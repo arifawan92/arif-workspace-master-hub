@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<title>My Backup System</title>
+<style>
+body{font-family:sans-serif; background:#0f172a; color:white; padding:20px;}
+.card{background:#1e293b; padding:15px; border-radius:12px; margin-bottom:15px;}
+input,textarea,button{width:100%; padding:10px; margin-top:8px; border-radius:8px; border:0;}
+button{background:#38bdf8; font-weight:bold; cursor:pointer;}
+.log{font-size:13px; background:#000; padding:10px; border-radius:8px; max-height:200px; overflow:auto;}
+.red{color:#f87171} .green{color:#4ade80}
+</style>
+</head>
+<body>
+<h2>🔒 Mera Backup + Failure + Audit System</h2>
+
+<div class="card">
+<h3>1. Roz Ka Note</h3>
+<textarea id="note" placeholder="Aaj kya kiya..."></textarea>
+<button onclick="saveNote()">Save Note</button>
+<div id="noteLog" class="log"></div>
+</div>
+
+<div class="card">
+<h3>2. Failure Log</h3>
+<input id="failInput" placeholder="Kya fail hua?">
+<button onclick="saveFail()">Add Failure</button>
+<div id="failLog" class="log red"></div>
+</div>
+
+<div class="card">
+<h3>3. Audit Log (Manipulation Control)</h3>
+<div id="auditLog" class="log green"></div>
+<button onclick="clearAll()">Sab Backup Clear (Double Confirm)</button>
+</div>
+
+<script>
+function load(){
+ noteLog.innerHTML=localStorage.getItem('notes')||'';
+ failLog.innerHTML=localStorage.getItem('fails')||'';
+ auditLog.innerHTML=localStorage.getItem('audit')||'';
+}
+function addAudit(msg){
+ let a = localStorage.getItem('audit')||'';
+ let entry = new Date().toLocaleString() + ' - ' + msg + '<br>';
+ localStorage.setItem('audit', entry + a);
+ load();
+}
+function saveNote(){
+ let v=note.value; if(!v) return;
+ let n=localStorage.getItem('notes')||'';
+ localStorage.setItem('notes', new Date().toLocaleString()+' : '+v+'<br>'+n);
+ addAudit('Note add kiya');
+ note.value=''; load();
+}
+function saveFail(){
+ let v=failInput.value; if(!v) return;
+ let f=localStorage.getItem('fails')||'';
+ localStorage.setItem('fails', new Date().toLocaleString()+' : '+v+'<br>'+f);
+ addAudit('Failure add kiya: '+v);
+ failInput.value=''; load();
+}
+function clearAll(){
+ if(confirm('Kya waqai sab delete karna hai?') && confirm('Final Confirm - Delete?')){
+   localStorage.clear(); load(); alert('Backup clear ho gaya');
+ }
+}
+load();
+</script>
+</body>
+</html>
