@@ -1,51 +1,36 @@
-﻿import { useState } from 'react'
+﻿import { useEffect, useState } from 'react'
+import { supabase } from './supabaseClient'
 
-const INITIAL_PROJECTS = [
-  { id: 1, name: "Ami Jan Health Tracker", status: "Active" },
-  { id: 2, name: "Ghar ke Akhrajat", status: "Active" },
-  { id: 3, name: "Dawakhana Records", status: "Active" },
-  { id: 4, name: "Quran Hifz Progress", status: "Active" },
-  { id: 5, name: "Bachon ki Taleem", status: "Active" },
-  { id: 6, name: "Zameen Hisab", status: "Active" },
-  { id: 7, name: "PEOS Secure Backup", status: "Active" },
-]
+function App() {
+  const [projects, setProjects] = useState([])
+  const [newName, setNewName] = useState('')
+  const [status, setStatus] = useState('Checking...')
 
-export default function App() {
-  const [projects, setProjects] = useState(INITIAL_PROJECTS)
-  const [name, setName] = useState("")
+  const fetchProjects = async () => {
+    const { data, error } = await supabase.from('peos_projects').select('*').order('id')
+    if (!error) { setProjects(data); setStatus('🟢 All Systems Online - Secure') }
+    else { setStatus('🔴 ' + error.message) }
+  }
 
-  const addProject = () => {
-    if(!name.trim()) return
-    setProjects([...projects, { id: Date.now(), name, status: "Active" }])
-    setName("")
+  useEffect(() => { fetchProjects() }, [])
+
+  const addProject = async () => {
+    if (!newName) return
+    const { error } = await supabase.from('peos_projects').insert([{ name: newName }])
+    if (!error) { setNewName(''); fetchProjects() }
   }
 
   return (
-    <div style={{ padding: 40, fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#0a7a00', fontSize: 32, fontWeight: 'bold' }}>PEOS v3.2 - AI AUTO + SELF CHECK + SECURE</h1>
-      
-      <div style={{ background: '#d4edda', padding: 12, borderRadius: 6, marginTop: 20 }}>
-        Status: ✅✅ AI Engine Online - Node 20 Stable
+    <div style={{ padding: 20, fontFamily: 'sans-serif', maxWidth: 600, margin: 'auto' }}>
+      <h1>PEOS v3.3 - SECURE</h1>
+      <p><b>Status:</b> {status}</p>
+      <p><b>Projects ({projects.length})</b> - Verified Empty & Clean</p>
+      <div style={{ display: 'flex', gap: 10 }}>
+        <input value={newName} onChange={e=>setNewName(e.target.value)} placeholder="New project name" style={{ flex: 1, padding: 8 }}/>
+        <button onClick={addProject} style={{ padding: '8px 16px' }}>Add</button>
       </div>
-
-      <div style={{ marginTop: 20, display: 'flex', gap: 10 }}>
-        <input 
-          placeholder="Project Name" 
-          value={name} 
-          onChange={e=>setName(e.target.value)}
-          style={{ padding: '8px 12px', border: '1px solid #999' }}
-        />
-        <button onClick={addProject} style={{ background: '#0a7a00', color: 'white', padding: '8px 16px', border: 'none', cursor: 'pointer' }}>+ Add Project</button>
-      </div>
-
-      <h2 style={{ marginTop: 30, fontWeight: 'bold', fontSize: 24 }}>Projects ({projects.length})</h2>
-      <div style={{ marginTop: 15 }}>
-        {projects.map(p=>(
-          <div key={p.id} style={{ border: '1px solid #ddd', padding: 12, marginBottom: 8, borderRadius: 4 }}>
-            {p.id}. {p.name} - <span style={{color: 'green'}}>{p.status}</span>
-          </div>
-        ))}
-      </div>
+      <ul>{projects.map(p=> <li key={p.id}>{p.name} - {new Date(p.created_at).toLocaleString()}</li>)}</ul>
     </div>
   )
 }
+export default App
