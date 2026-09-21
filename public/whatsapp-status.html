@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PEOS WhatsApp Status - Auto Story</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:system-ui;overflow:hidden;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center}
+.status-container{width:100%;max-width:400px;height:100vh;position:relative;background:#0f172a;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 0.6s ease;display:flex;flex-direction:column}
+.slide.active{opacity:1}
+.progress-bar{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:4px;z-index:10}
+.bar{height:3px;background:rgba(255,255,255,0.3);flex:1;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:#fff;width:0%}
+.info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent, rgba(0,0,0,0.9));padding:50px 16px 16px;z-index:5}
+.controls{position:absolute;top:0;bottom:0;width:50%;z-index:6}.left{left:0}.right{right:0}
+.avatar{width:32px;height:32px;background:#38bdf8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000}
+</style>
+</head><body>
+<div class="status-container" id="container">
+  <div class="progress-bar" id="progress"></div>
+  <div class="slide active"><div style="padding:20px;text-align:center;background:#0f172a;height:100%;display:flex;flex-direction:column;justify-content:center"><h1 style="color:#38bdf8;font-size:28px">PEOS IS LIVE! 🚀</h1><p style="margin:12px 0;color:#94a3b8">Personal Engineering OS<br>by Muhammad Arif - Mansehra</p><div style="margin:20px 0"><span style="background:#ff9800;color:#fff;padding:10px 20px;border-radius:20px">📖 Safarnama</span> <span style="background:#0d47a1;color:#fff;padding:10px 20px;border-radius:20px">🎯 Mission</span></div><p style="font-size:12px;color:#64748b;margin-top:20px">peos-one.vercel.app</p></div></div>
+  <div class="slide"><div style="padding:0;height:100%;background:#f1f5f9;display:flex;flex-direction:column"><div style="background:linear-gradient(90deg,#1e3a8a,#3b82f6);padding:24px;text-align:center;color:#fff"><h2>PEOS - Mission & Vision</h2><p>Public Empowerment OS</p></div><div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:16px"><div style="background:#fff;color:#000;padding:16px;border-radius:12px"><b>🎯 Mission - مشن</b><p style="margin-top:8px;font-size:14px">To empower every common person with simple digital tools</p><p style="text-align:right;margin-top:8px">ہر عام آدمی کو آسان ڈیجیٹل ٹولز دینا</p></div><div style="background:#fff;color:#000;padding:16px;border-radius:12px"><b>🌍 Vision - وژن</b><p style="margin-top:8px;font-size:14px">Farmer in Mansehra has same tools as CEO in New York.</p></div></div></div></div>
+  <div class="slide"><div style="background:#fff8e1;height:100%;padding:20px;display:flex;flex-direction:column;justify-content:center;color:#000;text-align:center"><p style="color:#2e7d32">بسم اللہ الرحمن الرحیم</p><h2 style="margin:12px 0">📖 Safarnama - آمنا سامنا</h2><div style="display:flex;gap:12px;margin:16px 0"><div style="flex:1;border-right:2px dashed #ff9800;padding-right:12px"><b>Face to Face</b><br><small>Life sometimes brings you face to face with yourself...</small></div><div style="flex:1;text-align:right"><b>آمنا سامنا</b><br><small>زندگی کبھی کبھی آپ کا آمنا سامنا خود سے کرا دیتی ہے</small></div></div><p style="font-size:11px;color:#999;margin-top:8px">peos-one.vercel.app/safarnama.html</p></div></div>
+  <div class="slide"><div style="background:#0f172a;height:100%;padding:20px;color:#e2e8f0"><h2 style="color:#38bdf8;text-align:center">PEOS Dashboard</h2><p style="text-align:center;color:#94a3b8;font-size:12px">Offline | Single File | Owner: Muhammad Arif</p><div style="background:#1e293b;padding:12px;border-radius:8px;margin:8px 0"><b>1. Note System</b></div><div style="background:#1e293b;padding:12px;border-radius:8px;margin:8px 0"><b>2. Failure Log</b></div><div style="background:#1e293b;padding:12px;border-radius:8px;margin:8px 0"><b>3. Audit Log</b></div><p style="text-align:center;font-size:11px;color:#475569;margin-top:12px">peos-one.vercel.app/PEOS_FINAL.html</p></div></div>
+  <div class="slide"><div style="background:linear-gradient(180deg,#0f172a,#1e3a8a);height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px;text-align:center"><h1 style="font-size:32px;color:#fbbf24">Shukriya<br>شکریہ 💚</h1><p style="margin:20px 0;color:#cbd5e1">From Mansehra to the World<br>منسہرہ سے دنیا تک</p><div style="background:rgba(255,255,255,0.1);padding:12px;border-radius:12px;font-size:11px">peos-one.vercel.app/PEOS_FINAL.html</div><p style="margin-top:24px;font-size:12px;color:#94a3b8">Dua me yaad rakhna<br><b style="color:#fff">- Muhammad Arif</b></p></div></div>
+  <div class="controls left" onclick="prev()"></div><div class="controls right" onclick="next()"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent, rgba(0,0,0,0.9));padding:16px"><div style="display:flex;align-items:center;gap:8px"><div class="avatar">A</div><div><b style="font-size:13px">Muhammad Arif</b><div style="font-size:11px;opacity:0.7">Mansehra</div></div></div></div>
+</div>
+<script>
+let idx=0;let slides=document.querySelectorAll('.slide');let bars=document.getElementById('progress');
+function createBars(){bars.innerHTML='';slides.forEach((_,i)=>{let b=document.createElement('div');b.style.cssText='height:3px;background:rgba(255,255,255,0.3);flex:1;border-radius:2px;overflow:hidden';let f=document.createElement('div');f.style.cssText='height:100%;background:#fff;width:0%';b.appendChild(f);bars.appendChild(b);if(i<idx)f.style.width='100%';});bars.style.display='flex';bars.style.gap='4px';}
+function show(i){slides.forEach(s=>s.classList.remove('active'));idx=(i+slides.length)%slides.length;slides[idx].classList.add('active');createBars();start();}
+function start(){let fill=bars.children[idx]?.firstChild;if(!fill)return;let w=0;let it=setInterval(()=>{w+=0.6;fill.style.width=w+'%';if(w>=100){clearInterval(it);next();}},30);}
+function next(){show(idx+1)} function prev(){show(idx-1)}
+createBars();start();setInterval(()=>next(),6000);
+</script>
+</body></html>
