@@ -1,1 +1,0 @@
-export default function BackupPage(){return(<div className='p-6'><h1 className='text-2xl font-bold'>Arif-Backup-Engine Pro v3.1</h1><div className='mt-4 p-4 bg-green-100 rounded-lg border'><p>? Last Backup: 2026-09-19</p><p>? Count: 358 | GB: 11.76</p><p>? Path: D:\iPhone-Import\2026-09-19</p><p>? Fixes: WUDFHost Killed + Fan Fixed</p></div></div>)}
